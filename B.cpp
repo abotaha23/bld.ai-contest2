@@ -16,21 +16,18 @@ const double EPS = 1e-8;
 
 void burn()
 {
-    int n, k; cin >> n >> k;
-    vector <ll> ps(n);
-    int ans = 0;
-    map <ll, int> pos;
-    for (int i = 0; i < n; i++) {
-        cin >> ps[i];
-        if (i) ps[i]+=ps[i-1];
-        ll cur = ps[i]%k;
-        if (pos.find(cur) == pos.end()) pos[cur] = i;
-        else {
-            ans = max(ans, i-pos[cur]);
-            cout << i << ' ' << pos[cur] << '\n';
-        }
+    int n; cin >> n;
+    vector <int> a(n);
+    for (auto &i : a) cin >> i;
+    int mn = 2e9;
+    vector <int> ans(n);
+    map <int, int> freq;
+    for (int i = n-1; ~i; i--) {
+        if (mn > a[i]) mn = a[i];
+        freq[a[i]]++;
+        ans[i] = freq[mn];
     }
-    cout << ans;
+    for (auto &i : ans) cout << i << ' ';
 }
 
 int main()
